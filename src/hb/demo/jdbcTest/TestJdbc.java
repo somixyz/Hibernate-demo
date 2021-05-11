@@ -2,7 +2,14 @@ package hb.demo.jdbcTest;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-
+/**
+ * 
+ * This class is created for JDBC connection testing purpose
+ * 
+ * @author Milos Dragovic
+ * 
+ * 
+ * */
 public class TestJdbc {
 
 	public static void main(String[] args) {
