@@ -11,40 +11,54 @@ public class UpdateStudentDemo {
 	public static void main(String[] args) {
 
 		// create session factory
-		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Student.class)
+		SessionFactory factory = new Configuration()
+				.configure("hibernate.cfg.xml")
+				.addAnnotatedClass(Student.class)
 				.buildSessionFactory();
 
 		// create session
 		Session session = factory.getCurrentSession();
 
-		try {
-
-			int studentID = 4;
-
-			// now get a new session and start transaction
+		try { 
+			
+			
+			int studentID = 1;
+			
+			//now get a new session and start transaction
 			session = factory.getCurrentSession();
 			session.beginTransaction();
 
-			// retrieve student based on the id: primary key
-			System.out.println("\n Getting student with id: " + studentID);
+			//retrieve student based on the id: primary key
+			System.out.println("\n Getting student with id: "+ studentID); 
+
+			
 			Student student = session.get(Student.class, studentID);
-
-			// delete the student
-			System.out.println("Deleting student: "+student);
-//			session.delete(student);
-
-			// commit the transaction
-//			session.getTransaction().commit();
-
 			
-			//DELETE STUDENT 2nd APPROACH
+			System.out.println("Updating student...");
 			
-			//delete student
-			System.out.println("Deleting student id=2");
-			session.createQuery("delete from Student where id=2").executeUpdate();
+			student.setFirstName("Zivojin");
 			
-			//commit transaction 
+			 
+			//commit the transaction
 			session.getTransaction().commit();
+			
+			
+			
+			//NEW CODE
+			
+			session = factory.getCurrentSession();
+			session.beginTransaction();
+			
+			//update email for all students
+			System.out.println("update email for first and fourth student ");
+			
+			session.createQuery("update Student set email='pikabii@gmail.com' where (id=1 AND id=3)").executeUpdate();
+			
+		 	
+			//commit the transaction
+			session.getTransaction().commit();
+			
+			
 			
 			
 			
